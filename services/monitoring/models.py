@@ -6,7 +6,7 @@ from time import time
 
 class CO2_Emission(models.Model):
     emission_Mt = models.FloatField()       # emissions in Metric tonnes
-    measured_date = models.DateField(auto_now_add=True)
+    measured_date = models.DateField()
     measured_at_minute = models.PositiveSmallIntegerField(default=1)   # Minute of the emission
 
     def __str__(self):

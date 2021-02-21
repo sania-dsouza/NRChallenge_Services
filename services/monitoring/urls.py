@@ -1,8 +1,9 @@
 from django.urls import path
-from .views import co2_emissions, co2_emissions_by_ts, so2_emissions, so2_emissions_by_ts, nox_emissions, nox_emissions_by_ts
+from .views import create_random_emissions, co2_emissions, co2_emissions_by_ts, so2_emissions, so2_emissions_by_ts, nox_emissions, nox_emissions_by_ts
 
 
 urlpatterns = [
+    path('start/', create_random_emissions, name='plant_home'),
     path('co2/', co2_emissions, name="co2_emissions"),
     path('co2/<measured_date>/<measured_at_minute>', co2_emissions_by_ts, name="co2_emissions_by_ts"),
     path('so2/', so2_emissions, name="so2_emissions"),
