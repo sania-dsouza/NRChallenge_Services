@@ -27,7 +27,7 @@ def create_random_emissions(request):
     return render(request, 'monitoring/start_plant.html', {})
 
 
-# CO2 Emissions
+# CO2 Emissions: all and emissions by timestamp
 @api_view(['GET'])
 def co2_emissions(request):
     snippets = CO2_Emission.objects.all()
@@ -43,7 +43,7 @@ def co2_emissions_by_ts(request, measured_date, measured_at_minute):
     return Response(serializer.data)
 
 
-# SO2 Emissions
+# SO2 Emissions: all and emissions by timestamp
 @api_view(['GET'])
 def so2_emissions(request):
     snippets = SO2_Emission.objects.all()
@@ -59,7 +59,7 @@ def so2_emissions_by_ts(request, measured_date, measured_at_minute):
     return Response(serializer.data)
 
 
-# NOX Emissions
+# NOX Emissions: all and emissions by timestamp
 @api_view(['GET'])
 def nox_emissions(request):
     snippets = NOX_Emission.objects.all()
