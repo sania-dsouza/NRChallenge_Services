@@ -1,0 +1,10 @@
+{
+    "dev": {
+        "aws_region": "us-east-2",
+        "django_settings": "services.settings",
+        "profile_name": "default",
+        "project_name": "services",
+        "runtime": "python3.7",
+        "s3_bucket": "zappa-3ocv1ylte"
+    }
+}
