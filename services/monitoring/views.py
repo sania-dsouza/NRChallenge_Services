@@ -16,7 +16,7 @@ import random, time
 
 # Generate random CO2, SO2, NOX emission values , one each minute
 def create_random_emissions(request):
-    for i in range(1440):
+    for i in range(1, 1441):
         rand_float_CO2 = random.random() * 100
         rand_float_SO2 = random.random() * 10
         rand_float_NOX = random.random() * 20
