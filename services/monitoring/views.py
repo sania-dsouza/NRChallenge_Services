@@ -3,26 +3,36 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from .models import CO2_Emission
+from .models import CO2_Emission, Co2_Reserve
 from .models import SO2_Emission
 from .models import NOX_Emission
+from .models import HeatRate
 
-from .serializers import CO2_Serializer
+from .serializers import CO2_Serializer, Co2_Reserve_Serializer
 from .serializers import SO2_Serializer
 from .serializers import NOX_Serializer
+from .serializers import HeatRate_Serializer
 
 import random, time
 
 
-# Generate random CO2, SO2, NOX emission values , one each minute
+# Generate random CO2, SO2, NOX emission values and heat rates, one each minute, also
+# get the co2 reserve
 def create_random_emissions(request):
+    co2_reserve = 1000000   # 1m Mt initially
     for i in range(1, 1441):
         rand_float_CO2 = random.random() * 100
         rand_float_SO2 = random.random() * 10
         rand_float_NOX = random.random() * 20
-        CO2_Emission.objects.get_or_create(emission_Mt=rand_float_CO2, measured_at_minute=i)
-        SO2_Emission.objects.get_or_create(emission_Mt=rand_float_SO2, measured_at_minute=i)
-        NOX_Emission.objects.get_or_create(emission_Mt=rand_float_NOX, measured_at_minute=i)
+        rand_int_HR = random.randint() *10000
+        rand_int_CO2_reserve = random.random() * 15  # assume 15% of all the emissions is sent to the reserve
+        CO2_Emission.objects.get_or_create(emission_Mt=rand_float_CO2, measured_date="2021-02-24", measured_at_minute=i)
+        SO2_Emission.objects.get_or_create(emission_Mt=rand_float_SO2, measured_date="2021-02-24", measured_at_minute=i)
+        NOX_Emission.objects.get_or_create(emission_Mt=rand_float_NOX, measured_date="2021-02-24", measured_at_minute=i)
+        HeatRate.objects.get_or_create(heat_rate=rand_int_HR, measured_date="2021-02-24", measured_at_minute=i)
+        co2_reserve = co2_reserve + rand_int_CO2_reserve
+        Co2_Reserve.objects.get_or_create(co2_store=co2_reserve, measured_date="2021-02-24", measured_at_minute=i)
+
         time.sleep(60.0)    # sleep for 1 minute
     return render(request, 'monitoring/start_plant.html', {})
 
@@ -71,5 +81,21 @@ def nox_emissions(request):
 def nox_emissions_by_ts(request, measured_date, measured_at_minute):
     snippet = NOX_Emission.objects.get(measured_date=measured_date, measured_at_minute=measured_at_minute);
     serializer = NOX_Serializer(snippet)
+    # print(snippet.local_currency)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def heat_rate_by_ts(request, measured_date, measured_at_minute):
+    snippet = HeatRate.objects.get(measured_date=measured_date, measured_at_minute=measured_at_minute);
+    serializer = HeatRate_Serializer(snippet)
+    # print(snippet.local_currency)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def co2_reserve_by_ts(request, measured_date, measured_at_minute):
+    snippet = Co2_Reserve.objects.get(measured_date=measured_date, measured_at_minute=measured_at_minute);
+    serializer = Co2_Reserve_Serializer(snippet)
     # print(snippet.local_currency)
     return Response(serializer.data)
