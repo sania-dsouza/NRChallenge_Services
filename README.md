@@ -5,7 +5,7 @@ This project has the API which pushed emissions and other power plant-related da
 It is built using the Django framework and uses the default sqlite database as its data store
 
 ## How to set up on local: ##
-- Clone the repo : ``` git clone <> ```
+- Clone the repo : ``` git clone https://github.com/sania-dsouza/NRChallenge_Services.git ```
 - cd into the 'services' folder: ``` cd services ```
 - Install dependencies: ``` pip install ```
 -  Run the project by sending information to New Relic at the same time 
