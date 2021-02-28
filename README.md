@@ -13,8 +13,8 @@ It is built using the Django framework and uses the default sqlite database as i
   NEW_RELIC_CONFIG_FILE=newrelic.ini newrelic-admin run-program python manage.py runserver 4001
 ```
 
-- View the project running at  http://127.0.0.1:4001/
-- Start the 'power plant' by navigating to '/start' :  http://127.0.0.1:4001/start
+- View the project running at  http://127.0.0.1:8082/
+- Start the 'power plant' by navigating to '/start' :  http://127.0.0.1:8082/start
 This starts the service which emits a random emission value for CO2 , NOX and SO2 per minute 
-- See the data emitted by navigating to /admin :  http://127.0.0.1:4001/admin
+- See the data emitted by navigating to /admin :  http://127.0.0.1:8082/admin
 
