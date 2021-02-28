@@ -1,6 +1,6 @@
 # NRChallenge_Services
 
-## Objective:##
+## Objective: ##
 This project has the API which pushed emissions and other power plant-related data to the controller app. 
 It is built using the Django framework and uses the default sqlite database as its data store
 
