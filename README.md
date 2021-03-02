@@ -10,7 +10,7 @@ It is built using the Django framework and uses the default sqlite database as i
 - Install dependencies: ``` pip install ```
 -  Run the project by sending information to New Relic at the same time 
 ```
-  NEW_RELIC_CONFIG_FILE=newrelic.ini newrelic-admin run-program python manage.py runserver 4001
+  NEW_RELIC_CONFIG_FILE=newrelic.ini newrelic-admin run-program python manage.py runserver 8082
 ```
 
 - View the project running at  http://127.0.0.1:8082/
